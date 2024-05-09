@@ -1,0 +1,12 @@
+{
+	"name": "@fuse/backend",
+	"version": "1.0.0",
+	"description": "The backend of the FUSE project",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Nour Habra, Mustafa Alhassny, Dana Alkhawaldeh, Abdullah Albitar",
+	"license": "ISC"
+}
