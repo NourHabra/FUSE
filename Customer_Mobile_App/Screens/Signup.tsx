@@ -1,67 +1,91 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StatusBar, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../AppNavigator';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTheme } from '../ThemeContext'; // Import useTheme
+
+// Type the navigation prop
+type SignupScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Signup'>;
 
 const Signup = () => {
+  const navigation = useNavigation<SignupScreenNavigationProp>();
+  const { theme, setTheme } = useTheme(); // Use theme from context
+
+  // Function to toggle theme
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  // Conditional styling based on theme
+  const backgroundColor = theme === 'light' ? '#FFFFFF' : '#303030'; // Explicit hex color values
+  const textColor = theme === 'light' ? '#1F1F1F' : '#FFFFFF'; // Adjusted for better contrast
+  const borderColor = theme === 'light' ? '#CCCCCC' : '#444444'; // Black for dark theme
+  const placeholderColor = theme === 'light' ? '#999999' : '#A0A0A0'; // Adjusted for visibility
+
   return (
-    <View className="flex-1 bg-gray-50 p-4 justify-center items-center">
-      <View style={{
-          width: '100%',
-          maxWidth: 350,
-          backgroundColor: 'white',
-          borderRadius: 10,
-          padding: 24,
-          borderColor: 'rgba(0, 0, 0, 0.1)',
-          borderWidth: 1,
-          borderBottomWidth: 2,
-          borderBottomColor: 'rgba(30, 144, 255, 0.5)', // subtle blue underglow
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 6,
-        }}>
-        <Text className="text-4xl font-bold text-center text-gray-900 mb-8">
+    <View style={{ flex: 1, backgroundColor, justifyContent: 'center', alignItems: 'center', padding: 16 }}>
+      <StatusBar backgroundColor={backgroundColor} barStyle={theme === 'light' ? 'dark-content' : 'light-content'} />
+      <TouchableOpacity style={styles.themeIcon} onPress={toggleTheme}>
+        <Icon name={theme === 'light' ? 'weather-night' : 'white-balance-sunny'} size={24} color={textColor} />
+      </TouchableOpacity>
+      <View style={{ width: '100%', maxWidth: 400, backgroundColor, borderRadius: 8, padding: 24, borderWidth: 1, borderColor }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', textAlign: 'center', color: textColor, marginBottom: 32 }}>
           Sign Up
         </Text>
 
         <TextInput
-          className="bg-gray-100 border border-gray-300 p-4 rounded-lg mb-5 text-lg"
+          style={{ backgroundColor: '#F0F0F0', borderColor, padding: 16, borderRadius: 8, marginBottom: 20, fontSize: 18, color: textColor }}
           placeholder="Email"
           keyboardType="email-address"
           textContentType="emailAddress"
           autoComplete="email"
-          placeholderTextColor="gray-500"
+          placeholderTextColor={placeholderColor}
         />
 
         <TextInput
-          className="bg-gray-100 border border-gray-300 p-4 rounded-lg mb-5 text-lg"
+          style={{ backgroundColor: '#F0F0F0', borderColor, padding: 16, borderRadius: 8, marginBottom: 20, fontSize: 18, color: textColor }}
           placeholder="Password"
-          secureTextEntry
+          secureTextEntry={true}
           textContentType="password"
           autoComplete="password"
-          placeholderTextColor="gray-500"
+          placeholderTextColor={placeholderColor}
         />
 
         <TextInput
-          className="bg-gray-100 border border-gray-300 p-4 rounded-lg mb-8 text-lg"
+          style={{ backgroundColor: '#F0F0F0', borderColor, padding: 16, borderRadius: 8, marginBottom: 32, fontSize: 18, color: textColor }}
           placeholder="Confirm Password"
-          secureTextEntry
+          secureTextEntry={true}
           textContentType="password"
           autoComplete="password"
-          placeholderTextColor="gray-500"
+          placeholderTextColor={placeholderColor}
         />
 
-        <TouchableOpacity className="bg-blue-600 hover:bg-blue-700 p-4 rounded-lg items-center shadow-md">
-          <Text className="text-white text-xl font-semibold">
+        <TouchableOpacity style={{ backgroundColor: '#007AFF', padding: 16, borderRadius: 8, alignItems: 'center' }}>
+          <Text style={{ color: '#FFFFFF', fontSize: 20, fontWeight: 'bold' }}>
             Sign Up
           </Text>
         </TouchableOpacity>
 
-        <Text className="mt-6 text-center text-sm text-gray-600">
-          Already have an account? <Text className="text-blue-600 font-semibold">Login</Text>
+        <Text style={{ marginTop: 24, textAlign: 'center', fontSize: 14, color: textColor }}>
+          Already have an account? 
+          <Text style={{ color: '#007AFF', fontWeight: 'bold' }} onPress={() => navigation.navigate('Login')}>
+            Login
+          </Text>
         </Text>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  themeIcon: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 10
+  }
+});
 
 export default Signup;
