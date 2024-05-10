@@ -1,4 +1,5 @@
 ./Backend/node_modules
-./Customer Mobie App/node_modules
+./FUSE_EXPO/node_modules
+./FUSE_EXPO/android
 ./Dashboard Frontend/node_modules
 ./Vendor Frontend/node_modules

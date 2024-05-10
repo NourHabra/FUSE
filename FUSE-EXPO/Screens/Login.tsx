@@ -20,10 +20,19 @@ const Login = () => {
   };
 
   // Conditional styling based on theme
-  const backgroundColor = theme === 'light' ? '#FFFFFF' : '#303030'; // Explicit hex color values
-  const textColor = theme === 'light' ? '#1F1F1F' : '#FFFFFF'; // Adjusted for better contrast
-  const borderColor = theme === 'light' ? '#CCCCCC' : '#444444'; // Black for dark theme
-  const placeholderColor = theme === 'light' ? '#999999' : '#A0A0A0'; // Adjusted for visibility
+  const backgroundColor = theme === 'light' ? '#FFFFFF' : '#303030';
+  const textColor = theme === 'light' ? '#1F1F1F' : '#FFFFFF';
+  const borderColor = theme === 'light' ? '#CCCCCC' : '#444444';
+  const placeholderColor = theme === 'light' ? '#999999' : '#A0A0A0';
+
+  // Function to handle login
+  const handleLogin = () => {
+    // Assuming the login credentials are correct and login is successful
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Home' }],
+    });
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor, justifyContent: 'center', alignItems: 'center', padding: 16 }}>
@@ -61,7 +70,7 @@ const Login = () => {
 
         <TouchableOpacity
           style={{ backgroundColor: '#007AFF', padding: 16, borderRadius: 8, alignItems: 'center' }}
-          onPress={() => navigation.navigate('Home')} // Navigate to Home on press
+          onPress={handleLogin}
         >
           <Text style={{ color: '#FFFFFF', fontSize: 20, fontWeight: 'bold' }}>
             Login
