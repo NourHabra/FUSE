@@ -15,7 +15,7 @@ async function register(req, res) {
         await notEmpty(name, email, password, rPassword);
         await matchPassword(password, rPassword);
 
-        const newUser = await prisma.user.create({
+        const newUser = await prisma.users.create({
             data: {
                 name,
                 email,
@@ -38,7 +38,7 @@ async function login(req, res) {
         const { id, password } = req.body;
         await notEmpty(id, password);
 
-        const user = await prisma.user.findUnique({
+        const user = await prisma.users.findUnique({
             where: {
                 id: parseInt(id),
             },

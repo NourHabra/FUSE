@@ -6,13 +6,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 async function index(req, res) {
-  const allUsers = await prisma.user.findMany();
+  const allUsers = await prisma.users.findMany();
   return res.json(allUsers);
 }
 
 async function show(req, res) {
   try {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.users.findUnique({
       where: {
         id: parseInt(req.params.id),
       },
@@ -33,14 +33,14 @@ async function create(req, res) {
 
 }
 
-// Update a user by ID
+// Update a users by ID
 async function update(req, res) {
 
 }
 
 async function destroy(req, res) {
   try {
-    const deletedUser = await prisma.user.delete({
+    const deletedUser = await prisma.users.delete({
       where: {
         id: parseInt(req.params.id),
       },
